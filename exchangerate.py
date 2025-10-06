@@ -1,11 +1,13 @@
 import csv
 
 class ExchangeRates:
-    def __init__(self, filename="BankOfCanadaExchangeRates.csv"):
+    def __init__(self, filename="/Users/siddhanthnarayanan/Fine 3300 class 2/FINE-3300-2025-A1/BankOfCanadaExchangeRates.csv"):
+                # Store filename and read latest USD/CAD rate
         self.filename = filename
         self.rate = self.read_latest_rate()
 
     def read_latest_rate(self):
+                # Read last row in CSV to get latest USD/CAD rate
         with open(self.filename, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             last_row = None
@@ -32,7 +34,7 @@ class ExchangeRates:
 if __name__ == "__main__":
     print("\n--- Exchange Rate Calculator ---")
 
-    exchange = ExchangeRates()  
+    exchange = ExchangeRates()  # filename is hardcoded
 
     amount = float(input("Enter the amount to convert: "))
     from_currency = input("From currency (USD/CAD): ").upper()
