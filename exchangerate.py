@@ -32,7 +32,7 @@ class ExchangeRates:
 if __name__ == "__main__":
     print("\n--- Exchange Rate Calculator ---")
 
-    exchange = ExchangeRates()  # filename is hardcoded
+    exchange = ExchangeRates()  
 
     amount = float(input("Enter the amount to convert: "))
     from_currency = input("From currency (USD/CAD): ").upper()
