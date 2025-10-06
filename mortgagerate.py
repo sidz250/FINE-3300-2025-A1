@@ -6,11 +6,14 @@ class MortgagePayment:
         self.years = years
 
     def pva(self, r, n):
+        # Present Value of Annuity Factor
         return (1 - (1 + r) ** (-n)) / r
 
     def payments(self, principal):
+        # Convert semi-annual compounding to effective annual rate
         effective_annual = (1 + self.rate / 2) ** 2 - 1
 
+        # Frequencies per year
         frequencies = {
             "monthly": 12,
             "semi_monthly": 24,
@@ -25,6 +28,7 @@ class MortgagePayment:
             factor = self.pva(r, n)
             results[key] = principal / factor
 
+        # Rapid payments (just fractions of monthly)
         results["rapid_bi_weekly"] = results["monthly"] / 2
         results["rapid_weekly"] = results["monthly"] / 4
 
@@ -36,7 +40,9 @@ class MortgagePayment:
             round(results["rapid_bi_weekly"], 2),
             round(results["rapid_weekly"], 2)
         )
-
+# -------------------------------
+# Prompt user for input
+# -------------------------------
 principal = float(input("Enter the principal amount: "))
 rate = float(input("Enter the quoted interest rate (as a percent, e.g. 5.5): "))
 years = int(input("Enter the amortization period in years: "))
@@ -44,7 +50,9 @@ years = int(input("Enter the amortization period in years: "))
 mortgage = MortgagePayment(rate, years)
 payments = mortgage.payments(principal)
 
-
+# -------------------------------
+# Print formatted results
+# -------------------------------
 print(f"\nMonthly Payment: ${payments[0]:,.2f}")
 print(f"Semi-monthly Payment: ${payments[1]:,.2f}")
 print(f"Bi-weekly Payment: ${payments[2]:,.2f}")
